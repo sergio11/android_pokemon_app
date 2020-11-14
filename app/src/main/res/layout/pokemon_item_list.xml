@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    app:cardElevation="@dimen/character_card_item_elevation"
+    android:layout_height="@dimen/character_card_item_height"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Pokemon Id -->
+        <TextView
+            android:id="@+id/pokemonIdTextView"
+            style="@style/TextAppearance.App.Caption"
+            android:background="@drawable/pokemon_id_drawable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="@dimen/common_margin"
+            android:layout_marginTop="@dimen/common_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="#2"
+            tools:ignore="RtlSymmetry" />
+
+
+        <!-- Pokemon Thumbnail -->
+        <ImageView
+            android:id="@+id/pokemonThumbnail"
+            android:layout_width="@dimen/character_thumbnail_size"
+            android:layout_height="@dimen/character_thumbnail_size"
+            android:layout_marginStart="@dimen/common_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pokemonIdTextView"
+            app:layout_constraintBottom_toTopOf="@id/pokemonNameTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_image_no_available"/>
+
+        <!-- Pokemon Name -->
+        <TextView
+            android:id="@+id/pokemonNameTextView"
+            style="@style/TextAppearance.App.Headline6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="@dimen/common_padding"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pokemonThumbnail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Pokemon Name"
+            tools:ignore="RtlSymmetry" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
