@@ -9,6 +9,12 @@ import sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.entity.PokemonE
  */
 interface IPokemonDAO: ISupportDAO<PokemonEntity> {
 
+    /**
+     * Find By Name
+     */
+    @Query("SELECT * FROM pokemons WHERE :name = name")
+    fun findByName(name: String): List<PokemonEntity>
+
     @Query("DELETE FROM pokemons")
     fun deleteAll()
 }

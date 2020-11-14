@@ -28,10 +28,17 @@ class PokemonListViewModel @Inject constructor(
     val pokemonListState: LiveData<PokemonListState> = _pokemonListState
 
     /**
+     * Load Next Page
+     */
+    fun loadNextPage() = viewModelScope.launch {
+        load(getNextOffset())
+    }
+
+    /**
      * Load Character List
      */
-    fun load() = viewModelScope.launch {
-        val offset = getNextOffset()
+    fun load(offset: Int = 0) = viewModelScope.launch {
+
         findPaginatedPokemonListInteract.execute(
             params = FindPaginatedPokemonListInteract.Params(
                 offset , DEFAULT_PAGE_LIMIT

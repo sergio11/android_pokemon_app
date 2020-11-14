@@ -15,13 +15,13 @@ interface IPokemonNetworkRepository {
      * @param limit
      */
     @Throws(NetworkException::class)
-    suspend fun findPaginatedPokemonList(offset: Int, limit: Int): List<Pokemon>
+    suspend fun findPaginatedList(offset: Int, limit: Int): List<Pokemon>
 
     /**
      * Find Pokemon By Id
      * @param name
      */
     @Throws(NetworkException::class)
-    suspend fun findPokemonByName(name: String): PokemonDetail
+    suspend fun findByName(name: String): PokemonDetail
 
 }

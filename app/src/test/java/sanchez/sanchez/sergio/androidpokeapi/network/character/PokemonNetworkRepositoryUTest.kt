@@ -48,7 +48,7 @@ class PokemonNetworkRepositoryUTest {
             val offset = 0
             val limit = 2
 
-            val characters = pokemonNetworkRepository.findPaginatedPokemonList(offset, limit)
+            val characters = pokemonNetworkRepository.findPaginatedList(offset, limit)
 
             assertThat(characters.isFromCache).isEqualTo(false)
             assertThat(characters.offset).isEqualTo(offset)
@@ -69,7 +69,7 @@ class PokemonNetworkRepositoryUTest {
                 })
 
             val characterId = 1011334L
-            val characterDetail = pokemonNetworkRepository.findPokemonByName(characterId)
+            val characterDetail = pokemonNetworkRepository.findByName(characterId)
 
             assertThat(characterDetail.id).isEqualTo(characterId)
             assertThat(characterDetail.comics.returned).isEqualTo(4)
@@ -89,7 +89,7 @@ class PokemonNetworkRepositoryUTest {
 
             try {
                 val characterId = 32321321321L
-                pokemonNetworkRepository.findPokemonByName(characterId)
+                pokemonNetworkRepository.findByName(characterId)
             } catch (ex: Exception) {
                 assertThat(ex).isInstanceOf(NetworkNoResultException::class.java)
             }
@@ -108,7 +108,7 @@ class PokemonNetworkRepositoryUTest {
 
             try {
                 val characterId = 1011334L
-                pokemonNetworkRepository.findPokemonByName(characterId)
+                pokemonNetworkRepository.findByName(characterId)
             } catch (ex: Exception) {
                 assertThat(ex).isInstanceOf(NetworkForbiddenException::class.java)
             }
@@ -127,7 +127,7 @@ class PokemonNetworkRepositoryUTest {
 
             try {
                 val characterId = 1011334L
-                pokemonNetworkRepository.findPokemonByName(characterId)
+                pokemonNetworkRepository.findByName(characterId)
             } catch (ex: Exception) {
                 assertThat(ex).isInstanceOf(NetworkBadRequestException::class.java)
             }

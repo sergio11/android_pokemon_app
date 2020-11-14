@@ -1,6 +1,11 @@
 package sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.converters
 
 import androidx.room.TypeConverter
+import com.squareup.moshi.Moshi
+import sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.entity.PokemonAbilityEntity
+import sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.entity.PokemonMoveEntity
+import sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.entity.PokemonSpriteEntity
+import sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.entity.PokemonTypeEntity
 import java.util.*
 
 
@@ -22,4 +27,46 @@ class Converters {
      */
     @TypeConverter
     fun dateToTimestamp(date: Date?): Long? = date?.time
+
+    @TypeConverter
+    fun pokemonAbilityToJson(value: List<PokemonAbilityEntity>): String =
+            toJson(value)
+
+    @TypeConverter
+    fun jsonToPokemonAbility(value: String): List<PokemonAbilityEntity>? =
+            fromJson<List<PokemonAbilityEntity>>(value)
+
+    @TypeConverter
+    fun pokemonMoveToJson(value: List<PokemonMoveEntity>): String =
+            toJson(value)
+
+    @TypeConverter
+    fun jsonToPokemonMove(value: String): List<PokemonMoveEntity>? =
+            fromJson<List<PokemonMoveEntity>>(value)
+
+    @TypeConverter
+    fun pokemonTypeToJson(value: List<PokemonTypeEntity>): String =
+            toJson(value)
+
+    @TypeConverter
+    fun jsonToPokemonType(value: String): List<PokemonTypeEntity>? =
+            fromJson<List<PokemonTypeEntity>>(value)
+
+    @TypeConverter
+    fun pokemonSpriteEntityToJson(value: PokemonSpriteEntity): String =
+            toJson(value)
+
+    @TypeConverter
+    fun jsonToPokemonSpriteEntity(value: String): PokemonSpriteEntity? =
+            fromJson<PokemonSpriteEntity>(value)
+
+
+    /**
+     * Private Methods
+     */
+    private inline fun <reified T> toJson(model: T): String =
+        Moshi.Builder().build().adapter(T::class.java).toJson(model)
+
+    private inline fun <reified T> fromJson(value: String): T? =
+            Moshi.Builder().build().adapter(T::class.java).fromJson(value)
 }

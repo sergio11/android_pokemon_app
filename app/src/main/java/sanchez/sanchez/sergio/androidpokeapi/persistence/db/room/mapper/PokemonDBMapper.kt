@@ -1,8 +1,7 @@
 package sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.mapper
 
-import sanchez.sanchez.sergio.androidpokeapi.domain.models.PokemonDetail
-import sanchez.sanchez.sergio.androidpokeapi.domain.models.PokemonSprite
-import sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.entity.PokemonEntity
+import sanchez.sanchez.sergio.androidpokeapi.domain.models.*
+import sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.entity.*
 
 /**
  * Mapper for Pokemon Entity
@@ -19,7 +18,28 @@ class PokemonDBMapper {
                 id = model.id,
                 name = model.name,
                 weight = model.weight,
-                height = model.height
+                height = model.height,
+                imageUrl = model.imageUrl,
+                abilities = model.abilities.map {
+                    PokemonAbilityEntity(
+                            name = it.name,
+                            isHidden = it.isHidden,
+                            slot = it.slot
+                    )
+                },
+                types = model.types.map {
+                    PokemonTypeEntity(
+                            name = it.name,
+                            slot = it.slot
+                    )
+                },
+                moves = model.moves.map {
+                    PokemonMoveEntity(name = it.name)
+                },
+                sprites = PokemonSpriteEntity(
+                        backDefault = model.sprites.backDefault,
+                        frontDefault = model.sprites.frontDefault
+                )
         )
 
     /**
@@ -41,14 +61,30 @@ class PokemonDBMapper {
         PokemonDetail(
                 id = entity.id,
                 name = entity.name,
-                imageUrl = "",
+                imageUrl = entity.imageUrl,
                 weight = entity.weight,
                 height = entity.height,
-                abilities = emptyList(),
-                types = emptyList(),
-                moves = emptyList(),
+                abilities = entity.abilities.map {
+                    PokemonAbility(
+                            name = it.name,
+                            isHidden = it.isHidden,
+                            slot = it.slot
+                    )
+                },
+                types = entity.types.map {
+                    PokemonType(
+                            slot = it.slot,
+                            name = it.name
+                    )
+                },
+                moves = entity.moves.map {
+                    PokemonMove(name = it.name)
+                },
                 forms = emptyList(),
-                sprites = PokemonSprite(null, null)
+                sprites = PokemonSprite(
+                        backDefault = entity.sprites.backDefault,
+                        frontDefault = entity.sprites.frontDefault
+                )
         )
 
     /**

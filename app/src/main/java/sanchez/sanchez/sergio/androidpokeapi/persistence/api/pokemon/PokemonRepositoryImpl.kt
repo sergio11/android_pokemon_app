@@ -25,7 +25,7 @@ class PokemonRepositoryImpl (
      */
     override suspend fun findPaginatedPokemonList(offset: Int, limit: Int): List<Pokemon> =
         try {
-            pokemonNetworkRepository.findPaginatedPokemonList(offset, limit)
+            pokemonNetworkRepository.findPaginatedList(offset, limit)
         } catch (ex: NetworkNoResultException) {
             throw RepoNoResultException(ex)
         } catch (ex: Exception) {
@@ -39,11 +39,18 @@ class PokemonRepositoryImpl (
      */
     override suspend fun findPokemonDetailByName(name: String): PokemonDetail =
         try {
-            pokemonNetworkRepository.findPokemonByName(name)
-        } catch (ex: NetworkNoResultException) {
-            throw RepoNoResultException(ex)
+            pokemonDBRepository.findByName(name)
         } catch (ex: Exception) {
-            throw RepoErrorException(ex)
+            // DB error, maybe pokemon doesn't in the local db
+            try {
+                pokemonNetworkRepository.findByName(name).also {
+                    // Save pokemon into Database
+                    pokemonDBRepository.save(it)
+                }
+            } catch (ex: NetworkNoResultException) {
+                throw RepoNoResultException(ex)
+            } catch (ex: Exception) {
+                throw RepoErrorException(ex)
+            }
         }
-
 }

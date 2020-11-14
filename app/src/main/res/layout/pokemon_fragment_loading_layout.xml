@@ -12,7 +12,7 @@
         android:id="@+id/loadingImageView"
         android:layout_width="@dimen/loading_image_size"
         android:layout_height="@dimen/loading_image_size"
-        android:src="@drawable/ic_loading_characters"
+        android:src="@drawable/ic_loading_pokemons"
         android:layout_marginBottom="@dimen/common_margin"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"

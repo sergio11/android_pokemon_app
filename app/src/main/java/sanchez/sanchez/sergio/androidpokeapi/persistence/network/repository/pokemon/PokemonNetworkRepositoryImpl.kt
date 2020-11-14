@@ -25,7 +25,7 @@ open class PokemonNetworkRepositoryImpl(
      * @param offset
      * @param limit
      */
-    override suspend fun findPaginatedPokemonList(offset: Int, limit: Int): List<Pokemon> = safeNetworkCall {
+    override suspend fun findPaginatedList(offset: Int, limit: Int): List<Pokemon> = safeNetworkCall {
         val dataResult = pokemonService.getPokemonList(offset, limit).data
         if(dataResult.isEmpty())
             throw NetworkNoResultException("Not Pokemon found")
@@ -36,7 +36,7 @@ open class PokemonNetworkRepositoryImpl(
      * Find Pokemon By Name
      * @param name
      */
-    override suspend fun findPokemonByName(name: String): PokemonDetail = safeNetworkCall {
+    override suspend fun findByName(name: String): PokemonDetail = safeNetworkCall {
         val dataResult =  pokemonService.getPokemonDetail(name)
         pokemonDetailNetworkMapper.dtoToModel(dataResult)
     }

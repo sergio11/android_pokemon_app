@@ -147,7 +147,7 @@ class PokemonListFragment: SupportFragment<PokemonListViewModel>(PokemonListView
      */
     override fun onLoadNextPage() {
         swipeRefreshLayout.isRefreshing = true
-        viewModel.load()
+        viewModel.loadNextPage()
     }
 
     /**
