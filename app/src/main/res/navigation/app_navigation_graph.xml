@@ -2,20 +2,21 @@
 <navigation xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/app_navigation_graph"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    app:startDestination="@id/characterListFragment">
+    app:startDestination="@id/pokemonListFragment">
 
     <fragment
-        android:id="@+id/characterListFragment"
+        android:id="@+id/pokemonListFragment"
         android:name="sanchez.sanchez.sergio.androidpokeapi.ui.features.list.PokemonListFragment"
-        android:label="CharacterListFragment" >
+        android:label="PokemonListFragment" >
+
         <action
-            android:id="@+id/action_characterListFragment_to_characterDetailFragment"
-            app:destination="@id/characterDetailFragment" />
+            android:id="@+id/action_pokemonListFragment_to_pokemonDetailFragment"
+            app:destination="@id/pokemonDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/characterDetailFragment"
+        android:id="@+id/pokemonDetailFragment"
         android:name="sanchez.sanchez.sergio.androidpokeapi.ui.features.detail.PokemonDetailFragment"
-        android:label="CharacterDetailFragment" >
+        android:label="PokemonDetailFragment" >
         <argument
             android:name="name"
             app:argType="string" />

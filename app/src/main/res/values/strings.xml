@@ -3,9 +3,10 @@
     <string name="character_list_title">Pokemon App</string>
     <string name="character_detail_error">An error occurred while retrieving the pokemon detail</string>
     <string name="character_detail_error_accept_button">Accept</string>
-    <string name="character_description_label">Description</string>
-    <string name="character_description_default_value">No Description</string>
-    <string name="character_modified_at_label">Modified At</string>
+    <string name="pokemon_name_label">Name</string>
+    <string name="pokemon_name_default_value">No Name</string>
+    <string name="pokemon_height_label">Height</string>
+    <string name="pokemon_weight_label">Weight</string>
     <string name="character_comic_label">Comic</string>
     <string name="character_comic_dialog_detail_title">Comics List</string>
     <string name="character_comic_action">see more</string>

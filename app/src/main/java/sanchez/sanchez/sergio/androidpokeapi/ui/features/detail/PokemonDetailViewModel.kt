@@ -38,9 +38,9 @@ class PokemonDetailViewModel @Inject constructor(
     fun loadByName(name: String) = viewModelScope.launch {
         findPokemonDetailByNameInteract.execute(
             params = FindPokemonDetailByNameInteract.Params(name),
-            onSuccess = fun(character) {
+            onSuccess = fun(pokemonDetail) {
                 _pokemonDetailState.postValue(
-                    PokemonDetailState.OnSuccess(character)
+                    PokemonDetailState.OnSuccess(pokemonDetail)
                 )
             },
             onError = fun(ex: Exception) {

@@ -1,6 +1,7 @@
 package sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.mapper
 
 import sanchez.sanchez.sergio.androidpokeapi.domain.models.PokemonDetail
+import sanchez.sanchez.sergio.androidpokeapi.domain.models.PokemonSprite
 import sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.entity.PokemonEntity
 
 /**
@@ -15,10 +16,10 @@ class PokemonDBMapper {
      */
     fun modelToEntity(model: PokemonDetail): PokemonEntity =
         PokemonEntity(
-            id = model.id,
-            name = model.name,
-            weight = model.weight,
-            height = model.height
+                id = model.id,
+                name = model.name,
+                weight = model.weight,
+                height = model.height
         )
 
     /**
@@ -38,10 +39,16 @@ class PokemonDBMapper {
      */
     fun entityToModel(entity: PokemonEntity): PokemonDetail =
         PokemonDetail(
-            id = entity.id,
-            name = entity.name,
-            weight = entity.weight,
-            height = entity.height
+                id = entity.id,
+                name = entity.name,
+                imageUrl = "",
+                weight = entity.weight,
+                height = entity.height,
+                abilities = emptyList(),
+                types = emptyList(),
+                moves = emptyList(),
+                forms = emptyList(),
+                sprites = PokemonSprite(null, null)
         )
 
     /**

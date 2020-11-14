@@ -8,14 +8,27 @@
     android:padding="@dimen/common_padding"
     android:orientation="vertical">
 
+    <ImageView
+        android:id="@+id/pokemonLogoImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_pokemon_logo"
+        android:layout_marginTop="@dimen/common_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/pokemonListTitle"
+        android:contentDescription="Content can not be loaded" />
+
     <com.google.android.material.textview.MaterialTextView
         style="@style/TextAppearance.App.Headline4"
-        android:id="@+id/characterListTitle"
+        android:id="@+id/pokemonListTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/character_title_margin_bottom"
         android:text="@string/character_list_title"
-        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/pokemonLogoImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/recyclerView"/>
@@ -26,7 +39,7 @@
         android:layout_height="0dp"
         android:background="@android:color/transparent"
         android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@id/characterListTitle"
+        app:layout_constraintTop_toBottomOf="@id/pokemonListTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

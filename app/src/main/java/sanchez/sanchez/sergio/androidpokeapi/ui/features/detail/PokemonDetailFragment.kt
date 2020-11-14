@@ -2,7 +2,6 @@ package sanchez.sanchez.sergio.androidpokeapi.ui.features.detail
 
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -12,6 +11,7 @@ import sanchez.sanchez.sergio.androidpokeapi.di.component.pokemon.PokemonDetailF
 import sanchez.sanchez.sergio.androidpokeapi.di.factory.DaggerComponentFactory
 import sanchez.sanchez.sergio.androidpokeapi.domain.models.PokemonDetail
 import sanchez.sanchez.sergio.androidpokeapi.ui.core.SupportFragment
+import sanchez.sanchez.sergio.androidpokeapi.ui.core.ext.loadFromCacheIfExists
 import sanchez.sanchez.sergio.androidpokeapi.ui.core.ext.popBackStack
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -75,7 +75,13 @@ class PokemonDetailFragment: SupportFragment<PokemonDetailViewModel>(PokemonDeta
      * @param pokemon
      */
     private fun onLoadSuccessfully(pokemon: PokemonDetail) {
-        characterNameTextView.text = pokemon.name
+
+        pokemonThumbnailImageView.loadFromCacheIfExists(pokemon.imageUrl)
+        pokemonNameAndIdListItem.valueText = String.format("%s #%d", pokemon.name, pokemon.id)
+        pokemonNameTextView.text = pokemon.name
+        pokemonHeightListItem.valueText = String.format("%d m", pokemon.height)
+        pokemonWeightListItem.valueText = String.format("%d kg", pokemon.weight)
+
         /*if(pokemon.description.isNotEmpty())
             characterDescriptionListItem.valueText = pokemon.description
         characterDetailTitleTextView.text = pokemon.name
@@ -119,7 +125,7 @@ class PokemonDetailFragment: SupportFragment<PokemonDetailViewModel>(PokemonDeta
                 }
         }
 
-        characterThumbnailImageView.loadFromCacheIfExists(pokemon.thumbnail)
+
 */
     }
 
@@ -132,7 +138,7 @@ class PokemonDetailFragment: SupportFragment<PokemonDetailViewModel>(PokemonDeta
         MaterialAlertDialogBuilder(requireContext())
             .setMessage(resources.getString(R.string.character_detail_error))
             .setPositiveButton(resources.getString(R.string.character_detail_error_accept_button)) { dialog, which ->
-                popBackStack(R.id.characterListFragment)
+                popBackStack()
             }
             .show()
     }

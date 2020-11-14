@@ -14,6 +14,7 @@ import sanchez.sanchez.sergio.androidpokeapi.di.component.pokemon.PokemonListFra
 import sanchez.sanchez.sergio.androidpokeapi.di.factory.DaggerComponentFactory
 import sanchez.sanchez.sergio.androidpokeapi.domain.models.Pokemon
 import sanchez.sanchez.sergio.androidpokeapi.ui.core.SupportFragment
+import sanchez.sanchez.sergio.androidpokeapi.ui.core.ext.navigate
 import timber.log.Timber
 
 /**
@@ -89,7 +90,12 @@ class PokemonListFragment: SupportFragment<PokemonListViewModel>(PokemonListView
         } ?: loadPokemonList()
     }
 
+    /**
+     * On Pokemon Clicked
+     * @param pokemon
+     */
     override fun onPokemonClicked(pokemon: Pokemon) {
+        navigate(PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailFragment(pokemon.name))
     }
 
     /**
