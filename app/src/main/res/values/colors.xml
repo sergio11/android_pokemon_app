@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#F44336</color>
+    <color name="translucentPrimaryColor">#45F44336</color>
     <color name="colorSecondary">#FFCDD2</color>
     <color name="colorPrimaryDark">#D32F2F</color>
+    <color name="translucentPrimaryDarkColor">#45D32F2F</color>
     <color name="colorAccent">#9E9E9E</color>
     <color name="colorAppBackground">#EDEDED</color>
     <color name="colorAppListItemDivider">#1F000000</color>
+
+    <!-- Splash Background Gradient Colors -->
+    <color name="colorGradientStart">@color/colorPrimaryDark</color>
+    <color name="colorGradientCenter">@color/colorPrimary</color>
+    <color name="colorGradientEnd">@color/colorAccent</color>
+    <color name="colorStripeStart">@color/translucentPrimaryColor</color>
+    <color name="colorStripeEnd">@color/translucentPrimaryDarkColor</color>
 </resources>

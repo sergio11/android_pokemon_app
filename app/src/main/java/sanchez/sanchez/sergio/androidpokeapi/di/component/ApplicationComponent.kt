@@ -24,4 +24,5 @@ interface ApplicationComponent {
     fun context(): Context
 
     fun mainActivityComponent(activityModule: ActivityModule): MainActivityComponent
+    fun splashActivityComponent(activityModule: ActivityModule): SplashActivityComponent
 }

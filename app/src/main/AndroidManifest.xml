@@ -16,12 +16,18 @@
         android:theme="@style/AppTheme"
         tools:targetApi="n">
 
-        <activity android:name="sanchez.sanchez.sergio.androidpokeapi.ui.MainActivity">
+        <activity android:name=".ui.features.splash.SplashScreenActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="sanchez.sanchez.sergio.androidpokeapi.ui.MainActivity"
+            />
 
     </application>
 

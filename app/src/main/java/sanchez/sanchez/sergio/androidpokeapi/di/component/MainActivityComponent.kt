@@ -17,8 +17,8 @@ interface MainActivityComponent: ActivityComponent {
 
     fun inject(activity: MainActivity)
 
-    fun charactersFragmentComponent(): PokemonListFragmentComponent
+    fun pokemonFragmentComponent(): PokemonListFragmentComponent
 
-    fun characterDetailFragmentComponent(): PokemonDetailFragmentComponent
+    fun pokemonDetailFragmentComponent(): PokemonDetailFragmentComponent
 
 }
