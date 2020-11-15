@@ -1,13 +1,13 @@
 package sanchez.sanchez.sergio.androidpokeapi.persistence.network.models
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
 
 /**
  * Pokemon Sprites DTO
  */
 data class PokemonSpritesDTO (
-        @field:Json(name = "back_default")
+        @SerializedName(value = "back_default")
         val backDefault : String?,
-        @field:Json(name = "front_default")
+        @SerializedName(value = "front_default")
         val frontDefault : String?
 )

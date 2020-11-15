@@ -2,20 +2,18 @@ package sanchez.sanchez.sergio.androidpokeapi.di.modules.network
 
 import android.content.Context
 import com.facebook.stetho.okhttp3.StethoInterceptor
-import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ElementsIntoSet
+import io.ktor.client.*
+import io.ktor.client.engine.okhttp.*
+import io.ktor.client.features.json.*
+import io.ktor.client.features.logging.*
 import okhttp3.Cache
 import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import retrofit2.Converter
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
-import sanchez.sanchez.sergio.androidpokeapi.BuildConfig
 import sanchez.sanchez.sergio.androidpokeapi.di.scopes.PerApplication
 import sanchez.sanchez.sergio.androidpokeapi.persistence.network.interceptors.ConnectivityInterceptor
-import sanchez.sanchez.sergio.androidpokeapi.persistence.network.serder.DateJsonAdapter
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 
@@ -24,16 +22,6 @@ import javax.inject.Named
  */
 @Module
 class NetworkModule {
-
-    /**
-     * Provide Converter Factory
-     */
-    @Provides
-    @PerApplication
-    fun provideConverterFactory(): Converter.Factory =
-        MoshiConverterFactory.create(Moshi.Builder()
-            .add(DateJsonAdapter())
-            .build())
 
     /**
      * Provide Network Interceptors
@@ -58,50 +46,46 @@ class NetworkModule {
             ConnectivityInterceptor(context)
         )
 
+
     /**
-     * Provide HTTP Client
-     * @param networkInterceptors
-     * @param requestInterceptors
+     * Provide Ktor Client
      */
     @Provides
     @PerApplication
-    fun provideHttpClient(
+    fun provideKtor(
         context: Context,
         @Named("networkInterceptors") networkInterceptors: Set<@JvmSuppressWildcards Interceptor>,
-        @Named("requestInterceptors") requestInterceptors: Set<@JvmSuppressWildcards Interceptor>
-    ): OkHttpClient {
-
-        val okHttpClientBuilder =  OkHttpClient.Builder()
-            .connectTimeout(2, TimeUnit.MINUTES)
-            .readTimeout(2, TimeUnit.MINUTES)
-            .writeTimeout(2, TimeUnit.MINUTES)
-            .retryOnConnectionFailure(true)
-            .cache(Cache(context.cacheDir, DEFAULT_CACHE_SIZE))
-
-        networkInterceptors.forEach {
-            okHttpClientBuilder.addNetworkInterceptor(it)
-        }
-        requestInterceptors.forEach {
-            okHttpClientBuilder.addInterceptor(it)
-        }
-        return okHttpClientBuilder.build()
+        @Named("requestInterceptors") requestInterceptors: Set<@JvmSuppressWildcards Interceptor>) =
+        HttpClient(OkHttp) {
+            install(JsonFeature) {
+                serializer = GsonSerializer()
+            }
+            // Logging
+            install(Logging) {
+                logger = object : Logger {
+                    override fun log(message: String) {
+                        Timber.d("KTOR -> %s", message)
+                    }
+                }
+                level = LogLevel.ALL
+            }
+            // Configure OkHTTP Interceptors
+            engine {
+                config {
+                    connectTimeout(2, TimeUnit.MINUTES)
+                    readTimeout(2, TimeUnit.MINUTES)
+                    writeTimeout(2, TimeUnit.MINUTES)
+                    retryOnConnectionFailure(true)
+                    cache(Cache(context.cacheDir, DEFAULT_CACHE_SIZE))
+                }
+                networkInterceptors.forEach {
+                    addNetworkInterceptor(it)
+                }
+                requestInterceptors.forEach {
+                    addInterceptor(it)
+                }
+            }
     }
-
-    /**
-     * Provide Retrofit
-     */
-    @Provides
-    @PerApplication
-    fun provideRetrofit(
-        converterFactory: Converter.Factory,
-        httpClient: OkHttpClient
-    ): Retrofit =
-        Retrofit.Builder()
-            .addConverterFactory(converterFactory)
-            .baseUrl(BuildConfig.BASE_URL)
-            .client(httpClient)
-            .build()
-
 
     companion object {
         const val DEFAULT_CACHE_SIZE: Long =  10 * 1024 * 1024 // 10 MB

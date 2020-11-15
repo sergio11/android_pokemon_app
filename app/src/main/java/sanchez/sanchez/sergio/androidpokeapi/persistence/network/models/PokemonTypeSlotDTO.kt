@@ -1,11 +1,11 @@
 package sanchez.sanchez.sergio.androidpokeapi.persistence.network.models
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
 
 
 data class PokemonTypeSlotDTO (
-        @field:Json(name = "slot")
+        @SerializedName(value = "slot")
         val slot: Int,
-        @field:Json(name = "type")
+        @SerializedName(value = "type")
         val type: PokemonTypeDTO
 )

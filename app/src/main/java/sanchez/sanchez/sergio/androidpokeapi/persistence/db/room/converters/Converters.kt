@@ -1,7 +1,7 @@
 package sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.converters
 
 import androidx.room.TypeConverter
-import com.squareup.moshi.Moshi
+import com.google.gson.Gson
 import sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.entity.PokemonAbilityEntity
 import sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.entity.PokemonMoveEntity
 import sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.entity.PokemonSpriteEntity
@@ -65,8 +65,8 @@ class Converters {
      * Private Methods
      */
     private inline fun <reified T> toJson(model: T): String =
-        Moshi.Builder().build().adapter(T::class.java).toJson(model)
+        Gson().getAdapter(T::class.java).toJson(model)
 
     private inline fun <reified T> fromJson(value: String): T? =
-            Moshi.Builder().build().adapter(T::class.java).fromJson(value)
+        Gson().getAdapter(T::class.java).fromJson(value)
 }

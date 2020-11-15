@@ -1,14 +1,14 @@
 package sanchez.sanchez.sergio.androidpokeapi.persistence.network.models
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
 
 /**
  * Generic API Response Wrapper
  **/
 data class APIResponse<T> (
-    @field:Json(name = "count") val count: Int,
-    @field:Json(name = "next") val next: String?,
-    @field:Json(name = "previous") val previous: String?,
+    @SerializedName(value = "count") val count: Int,
+    @SerializedName(value = "next") val next: String?,
+    @SerializedName(value = "previous") val previous: String?,
     // The results returned by the call.
-    @field:Json(name = "results") val data: List<T>
+    @SerializedName(value = "results") val data: List<T>
 )

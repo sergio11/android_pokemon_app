@@ -1,27 +1,27 @@
 package sanchez.sanchez.sergio.androidpokeapi.persistence.network.models
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
 
 /**
  * Pokemon Detail DTO
  */
 data class PokemonDetailDTO (
-        @field:Json(name = "id")
+        @SerializedName(value = "id")
         val id: Long,
-        @field:Json(name = "name")
+        @SerializedName(value = "name")
         val name: String,
-        @field:Json(name = "height")
+        @SerializedName(value = "height")
         val height: Int,
-        @field:Json(name = "weight")
+        @SerializedName(value = "weight")
         val weight: Int,
-        @field:Json(name = "abilities")
+        @SerializedName(value = "abilities")
         val abilities: List<PokemonAbilityGroupDTO>,
-        @field:Json(name = "types")
+        @SerializedName(value = "types")
         val types: List<PokemonTypeSlotDTO>,
         /*@field:Json(name = "forms")
         val forms: List<PokemonFormDTO>,
         @field:Json(name = "moves")
         val moves: List<PokemonMoveDTO>,*/
-        @field:Json(name = "sprites")
+        @SerializedName(value = "sprites")
         val sprites: PokemonSpritesDTO
 )

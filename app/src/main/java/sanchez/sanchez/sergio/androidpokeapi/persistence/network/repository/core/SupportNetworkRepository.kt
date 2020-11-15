@@ -1,8 +1,10 @@
 package sanchez.sanchez.sergio.androidpokeapi.persistence.network.repository.core
 
+import io.ktor.client.features.*
+import io.ktor.client.response.*
 import sanchez.sanchez.sergio.androidpokeapi.persistence.network.exception.*
 import java.io.IOException
-import java.net.ConnectException
+import java.nio.charset.Charset
 
 /**
  * Some HTTP response codes that We could get when making something request
@@ -26,39 +28,33 @@ abstract class SupportNetworkRepository {
         } catch (exception: IOException){
             // map interrupted I/O to Network No Internet Exception
             throw NetworkNoInternetException()
-        } catch (ex: NetworkException) {
-            throw ex
-        } catch (exception: Throwable) {
-            val retrofitException = RetrofitException.asRetrofitException(exception)
-            if (retrofitException.kind === RetrofitException.Kind.NETWORK) {
-                throw if (exception is ConnectException)
-                    NetworkConnectException(cause = exception)
-                else
-                    NetworkErrorException(cause = exception)
-            } else {
-                try {
-                    throw onApiException(retrofitException)
-                } catch (e1: IOException) {
-                    e1.printStackTrace()
-                    throw NetworkErrorException(cause = e1)
-                }
+        } catch (exception: NetworkException) {
+            throw exception
+        } catch (exception: ResponseException) {
+            try {
+                throw onApiException(exception)
+            } catch (exception: Exception) {
+                throw NetworkErrorException(cause = exception)
             }
+        } catch (exception: Exception) {
+            throw NetworkErrorException(cause = exception)
         }
     }
 
     /**
      * Map HTTP Error codes to exceptions to easy handler
-     * @param apiException
+     * @param responseException
      */
-    open fun onApiException(apiException: RetrofitException): Exception = apiException.response?.let {
-        when(it.code()) {
-            BAD_REQUEST_CODE -> NetworkBadRequestException(message = it.message(), cause = apiException)
-            UNAUTHORIZED_CODE -> NetworkUnauthorizedException(message = it.message(), cause = apiException)
-            FORBIDDEN_CODE -> NetworkForbiddenException(message = it.message(), cause = apiException)
-            NOT_FOUND_CODE -> NetworkNoResultException(message = it.message(), cause = apiException)
-            INTERNAL_SERVER_ERROR_CODE -> NetworkErrorException(message = it.message(), cause = apiException)
-            CONFLICT_ERROR_CODE -> NetworkUnverifiedAccountException(message = it.message(), cause = apiException)
-            else -> NetworkErrorException()
+    open suspend fun onApiException(responseException: ResponseException): Exception =
+        responseException.response.let {
+            when(it.status.value) {
+                BAD_REQUEST_CODE -> NetworkBadRequestException(message = it.readText(Charset.forName("UTF-8")), cause = responseException)
+                UNAUTHORIZED_CODE -> NetworkUnauthorizedException(message = it.readText(Charset.forName("UTF-8")), cause = responseException)
+                FORBIDDEN_CODE -> NetworkForbiddenException(message = it.readText(Charset.forName("UTF-8")), cause = responseException)
+                NOT_FOUND_CODE -> NetworkNoResultException(message = it.readText(Charset.forName("UTF-8")), cause = responseException)
+                INTERNAL_SERVER_ERROR_CODE -> NetworkErrorException(message = it.readText(Charset.forName("UTF-8")), cause = responseException)
+                CONFLICT_ERROR_CODE -> NetworkUnverifiedAccountException(message = it.readText(Charset.forName("UTF-8")), cause = responseException)
+                else -> NetworkErrorException()
+            }
         }
-    } ?: NetworkErrorException()
 }

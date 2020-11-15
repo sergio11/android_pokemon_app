@@ -2,28 +2,19 @@ package sanchez.sanchez.sergio.androidpokeapi.di.modules.pokemon.core
 
 import dagger.Module
 import dagger.Provides
-import retrofit2.Retrofit
+import io.ktor.client.*
 import sanchez.sanchez.sergio.androidpokeapi.di.scopes.PerFragment
 import sanchez.sanchez.sergio.androidpokeapi.persistence.network.mapper.PokemonDetailNetworkMapper
 import sanchez.sanchez.sergio.androidpokeapi.persistence.network.mapper.PokemonNetworkMapper
-import sanchez.sanchez.sergio.androidpokeapi.persistence.network.repository.pokemon.PokemonNetworkRepositoryImpl
 import sanchez.sanchez.sergio.androidpokeapi.persistence.network.repository.pokemon.IPokemonNetworkRepository
-import sanchez.sanchez.sergio.androidpokeapi.persistence.network.service.IPokemonService
+import sanchez.sanchez.sergio.androidpokeapi.persistence.network.repository.pokemon.PokemonNetworkRepositoryImpl
+
 
 /**
  * Pokemon Network Module
  */
 @Module
 class PokemonNetworkModule {
-
-    /**
-     * Provide Pokemon Network Service
-     * @param retrofit
-     */
-    @Provides
-    @PerFragment
-    fun providePokemonNetworkService(retrofit: Retrofit): IPokemonService =
-        retrofit.create(IPokemonService::class.java)
 
     /**
      * Private Pokemon Network Mapper
@@ -41,17 +32,17 @@ class PokemonNetworkModule {
 
     /**
      * Provide Pokemon Network Repository
-     * @param pokemonNetworkService
+     * @param httpClient
      * @param pokemonNetworkMapper
-     *
+     * @param pokemonDetailNetworkMapper
      */
     @Provides
     @PerFragment
     fun provideCharacterNetworkRepository(
-        pokemonNetworkService: IPokemonService,
+        httpClient: HttpClient,
         pokemonNetworkMapper: PokemonNetworkMapper,
         pokemonDetailNetworkMapper: PokemonDetailNetworkMapper
     ): IPokemonNetworkRepository =
-        PokemonNetworkRepositoryImpl(pokemonNetworkService, pokemonNetworkMapper, pokemonDetailNetworkMapper)
+        PokemonNetworkRepositoryImpl(httpClient, pokemonNetworkMapper, pokemonDetailNetworkMapper)
 
 }

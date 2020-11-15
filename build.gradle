@@ -5,7 +5,6 @@ buildscript {
     // Library Versions
     ext.kotlin_version = "1.4.10"
     ext.room_version = '2.3.0-alpha02'
-    ext.retrofit = '2.9.0'
     ext.stetho_version = '1.5.1'
     ext.kotlin_coroutines_version = '1.3.7'
     ext.constraint_layout_version = '2.0.4'
@@ -24,6 +23,7 @@ buildscript {
     ext.kenburns_view_version = "1.0.7"
     ext.paging_version = "3.0.0-alpha09"
     ext.coroutines_android_version = '1.3.0'
+    ext.ktor_version = "1.2.2"
 
     repositories {
         google()

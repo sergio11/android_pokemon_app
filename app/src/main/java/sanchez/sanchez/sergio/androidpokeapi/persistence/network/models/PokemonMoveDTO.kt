@@ -1,11 +1,11 @@
 package sanchez.sanchez.sergio.androidpokeapi.persistence.network.models
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
 
 /**
  * Pokemon Move DTO
  */
 data class PokemonMoveDTO (
-        @field:Json(name = "name")
+        @SerializedName(value = "name")
         val name: String
 )
