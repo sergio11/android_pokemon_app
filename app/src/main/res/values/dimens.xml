@@ -8,19 +8,21 @@
     <dimen name="loading_image_size">120dp</dimen>
     <dimen name="error_image_size">120dp</dimen>
 
-    <dimen name="character_title_margin_bottom">30dp</dimen>
-    <dimen name="character_card_item_height">200dp</dimen>
-    <dimen name="character_card_item_elevation">10dp</dimen>
+    <dimen name="pokemon_title_margin_bottom">30dp</dimen>
+    <dimen name="pokemon_card_item_height">200dp</dimen>
+    <dimen name="pokemon_card_item_elevation">10dp</dimen>
     <dimen name="item_vertical_separation">10dp</dimen>
     <dimen name="item_horizontal_separation">20dp</dimen>
-    <dimen name="character_thumbnail_size">100dp</dimen>
-    <dimen name="character_detail_parallax_container">250dp</dimen>
-    <dimen name="character_detail_list_item_margin_top">20dp</dimen>
+    <dimen name="pokemon_thumbnail_size">100dp</dimen>
+    <dimen name="pokemon_detail_parallax_container">250dp</dimen>
+    <dimen name="pokemon_detail_list_item_margin_top">20dp</dimen>
 
     <dimen name="material_button_small_height">50dp</dimen>
     <dimen name="material_button_small_text_size">12sp</dimen>
     <dimen name="material_button_small_icon_size">20dp</dimen>
     <dimen name="material_list_item_padding_bottom">10dp</dimen>
+
+    <dimen name="pokemon_sprite_icon_size">50dp</dimen>
 
 
 </resources>

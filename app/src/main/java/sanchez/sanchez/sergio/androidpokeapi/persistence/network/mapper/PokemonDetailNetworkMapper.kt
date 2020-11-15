@@ -44,8 +44,10 @@ class PokemonDetailNetworkMapper {
                 )
             },
             sprites = PokemonSprite(
-                backDefault = dto.sprites.backDefault,
-                frontDefault = dto.sprites.frontDefault
+                    backDefault = dto.sprites.backDefault,
+                    backShiny = dto.sprites.backShiny,
+                    frontDefault = dto.sprites.frontDefault,
+                    frontShiny = dto.sprites.frontShiny
             )
         )
 

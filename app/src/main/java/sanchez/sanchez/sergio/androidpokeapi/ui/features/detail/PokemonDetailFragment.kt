@@ -2,6 +2,7 @@ package sanchez.sanchez.sergio.androidpokeapi.ui.features.detail
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -14,7 +15,6 @@ import sanchez.sanchez.sergio.androidpokeapi.ui.core.SupportFragment
 import sanchez.sanchez.sergio.androidpokeapi.ui.core.ext.loadFromCacheIfExists
 import sanchez.sanchez.sergio.androidpokeapi.ui.core.ext.popBackStack
 import timber.log.Timber
-import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -24,10 +24,6 @@ class PokemonDetailFragment: SupportFragment<PokemonDetailViewModel>(PokemonDeta
 
     private val fragmentComponent: PokemonDetailFragmentComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         DaggerComponentFactory.getPokemonDetailFragmentComponent(requireActivity() as AppCompatActivity)
-    }
-
-    private val modifiedAtDateFormat by lazy {
-        SimpleDateFormat("yyyy-mm-dd hh:mm:ss", Locale.getDefault())
     }
 
     private val args by navArgs<PokemonDetailFragmentArgs>()
@@ -76,57 +72,89 @@ class PokemonDetailFragment: SupportFragment<PokemonDetailViewModel>(PokemonDeta
      */
     private fun onLoadSuccessfully(pokemon: PokemonDetail) {
 
+
         pokemonThumbnailImageView.loadFromCacheIfExists(pokemon.imageUrl)
         pokemonNameAndIdListItem.valueText = String.format("%s #%d", pokemon.name, pokemon.id)
         pokemonNameTextView.text = pokemon.name
+        pokemonDetailTitleTextView.text = pokemon.name
         pokemonHeightListItem.valueText = String.format("%d m", pokemon.height)
         pokemonWeightListItem.valueText = String.format("%d kg", pokemon.weight)
 
-        /*if(pokemon.description.isNotEmpty())
-            characterDescriptionListItem.valueText = pokemon.description
-        characterDetailTitleTextView.text = pokemon.name
-        pokemon.modified?.let {
-            characterModifiedAtItem.valueText = modifiedAtDateFormat.format(it)
+        // Pokemon Sprites
+
+        pokemon.sprites.backDefault?.let {
+            pokemonSpriteBackDefault.loadFromCacheIfExists(it)
         }
 
-        characterComicItem.apply {
-            valueText = String.format(Locale.getDefault(),
-                getString(R.string.character_comic_value), pokemon.comics.available)
-            if(pokemon.comics.items.isNotEmpty())
+        pokemon.sprites.frontDefault?.let {
+            pokemonSpriteFrontDefault.loadFromCacheIfExists(it)
+        }
+
+        pokemon.sprites.backShiny?.let {
+            pokemonSpriteBackShiny.loadFromCacheIfExists(it)
+        }
+
+        pokemon.sprites.frontShiny?.let {
+            pokemonSpriteFrontShiny.loadFromCacheIfExists(it)
+        }
+
+        // Pokemon Types
+        pokemonTypesItem.apply {
+            valueText = String.format(Locale.getDefault(), getString(R.string.pokemon_types_value), pokemon.types.size)
+            if(pokemon.types.isNotEmpty())
                 addAction {
                     showDetailDialog(
-                        titleRes = R.string.character_comic_dialog_detail_title,
-                        items = pokemon.comics.items
+                            titleRes = R.string.pokemon_types_dialog_detail_title,
+                            items = pokemon.types.map {
+                                it.name
+                            }.toTypedArray()
+                    )
+                }
+        }
+        // Pokemon Abilities
+        pokemonAbilitiesItem.apply {
+            valueText = String.format(Locale.getDefault(), getString(R.string.pokemon_abilities_value), pokemon.abilities.size)
+            if(pokemon.abilities.isNotEmpty())
+                addAction {
+                    showDetailDialog(
+                            titleRes = R.string.pokemon_abilities_dialog_detail_title,
+                            items = pokemon.abilities.map {
+                                it.name
+                            }.toTypedArray()
+                    )
+                }
+        }
+        // Pokemon Moves
+        pokemonMovesItem.apply {
+            valueText = String.format(Locale.getDefault(), getString(R.string.pokemon_moves_value),
+                    pokemon.moves.size)
+            if(pokemon.moves.isNotEmpty())
+                addAction {
+                    showDetailDialog(
+                            titleRes = R.string.pokemon_moves_dialog_detail_title,
+                            items = pokemon.moves.map {
+                                it.name
+                            }.toTypedArray()
                     )
                 }
         }
 
-        characterSeriesItem.apply {
-            valueText = String.format(Locale.getDefault(),
-                getString(R.string.character_series_value), pokemon.series.available)
-            if(pokemon.series.items.isNotEmpty())
+        // Pokemon Stats
+        pokemonStatsItem.apply {
+            valueText = String.format(Locale.getDefault(), getString(R.string.pokemon_stats_value),
+                    pokemon.stats.size)
+            if(pokemon.stats.isNotEmpty())
                 addAction {
                     showDetailDialog(
-                        titleRes = R.string.character_series_dialog_detail_title,
-                        items = pokemon.series.items
+                            titleRes = R.string.pokemon_stats_dialog_detail_title,
+                            items = pokemon.stats.map {
+                                String.format(context.getString(R.string.pokemon_stats_item_value),
+                                        it.name, it.baseStat, it.effort)
+                            }.toTypedArray()
                     )
                 }
         }
 
-        characterEventsItem.apply {
-            valueText = String.format(Locale.getDefault(),
-                getString(R.string.character_events_value), pokemon.events.available)
-            if(pokemon.events.items.isNotEmpty())
-                addAction {
-                    showDetailDialog(
-                        titleRes = R.string.character_events_dialog_detail_title,
-                        items = pokemon.events.items
-                    )
-                }
-        }
-
-
-*/
     }
 
     /**
@@ -136,8 +164,8 @@ class PokemonDetailFragment: SupportFragment<PokemonDetailViewModel>(PokemonDeta
     private fun onErrorOccurred(ex: Exception) {
         Timber.d("OnErrorOccurred -> ${ex.message}")
         MaterialAlertDialogBuilder(requireContext())
-            .setMessage(resources.getString(R.string.character_detail_error))
-            .setPositiveButton(resources.getString(R.string.character_detail_error_accept_button)) { dialog, which ->
+            .setMessage(resources.getString(R.string.pokemon_detail_error))
+            .setPositiveButton(resources.getString(R.string.pokemon_detail_error_accept_button)) { dialog, which ->
                 popBackStack()
             }
             .show()
@@ -148,12 +176,11 @@ class PokemonDetailFragment: SupportFragment<PokemonDetailViewModel>(PokemonDeta
      * @param titleRes
      * @param items
      */
-   /** private fun showDetailDialog(@StringRes titleRes: Int, items: List<ComicsItem>) {
+   private fun showDetailDialog(@StringRes titleRes: Int, items: Array<String>) {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(titleRes)
-            .setItems(items.map { it.name }.toTypedArray(), null)
+            .setItems(items, null)
             .show()
     }
-*/
 
 }

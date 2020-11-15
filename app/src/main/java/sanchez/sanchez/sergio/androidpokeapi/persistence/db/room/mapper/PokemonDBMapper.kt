@@ -37,14 +37,16 @@ class PokemonDBMapper {
                 PokemonMoveEntity(name = it.name)
             },
             sprites = PokemonSpriteEntity(
-                backDefault = model.sprites.backDefault,
-                frontDefault = model.sprites.frontDefault
+                    backDefault = model.sprites.backDefault,
+                    backShiny = model.sprites.backShiny,
+                    frontDefault = model.sprites.frontDefault,
+                    frontShiny = model.sprites.frontShiny
             ),
             stats = model.stats.map {
                 PokemonStatEntity(
-                    name = it.name,
-                    baseStat = it.baseStat,
-                    effort = it.effort
+                        name = it.name,
+                        baseStat = it.baseStat,
+                        effort = it.effort
                 )
             }
         )
@@ -88,8 +90,10 @@ class PokemonDBMapper {
                 PokemonMove(name = it.name)
             },
             sprites = PokemonSprite(
-                backDefault = entity.sprites.backDefault,
-                frontDefault = entity.sprites.frontDefault
+                    backDefault = entity.sprites.backDefault,
+                    backShiny = entity.sprites.backShiny,
+                    frontDefault = entity.sprites.frontDefault,
+                    frontShiny = entity.sprites.frontShiny
             ),
             stats = entity.stats.map {
                 PokemonStat(

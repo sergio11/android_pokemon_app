@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    app:cardElevation="@dimen/character_card_item_elevation"
-    android:layout_height="@dimen/character_card_item_height"
+    app:cardElevation="@dimen/pokemon_card_item_elevation"
+    android:layout_height="@dimen/pokemon_card_item_height"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,8 +31,8 @@
         <!-- Pokemon Thumbnail -->
         <ImageView
             android:id="@+id/pokemonThumbnail"
-            android:layout_width="@dimen/character_thumbnail_size"
-            android:layout_height="@dimen/character_thumbnail_size"
+            android:layout_width="@dimen/pokemon_thumbnail_size"
+            android:layout_height="@dimen/pokemon_thumbnail_size"
             android:layout_marginStart="@dimen/common_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/pokemonIdTextView"

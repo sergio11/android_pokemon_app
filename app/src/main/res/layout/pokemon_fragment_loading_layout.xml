@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginBottom="@dimen/common_margin"
-        android:text="@string/loading_characters_message"
+        android:text="@string/loading_pokemon_message"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/loadingImageView"
         app:layout_constraintEnd_toEndOf="parent"
