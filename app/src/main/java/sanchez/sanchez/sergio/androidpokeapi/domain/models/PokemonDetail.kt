@@ -12,7 +12,7 @@ data class PokemonDetail (
     val weight: Int,
     val abilities: List<PokemonAbility>,
     val moves: List<PokemonMove>,
-    val forms: List<PokemonForm>,
     val types: List<PokemonType>,
-    val sprites: PokemonSprite
+    val sprites: PokemonSprite,
+    val stats: List<PokemonStat>
 )

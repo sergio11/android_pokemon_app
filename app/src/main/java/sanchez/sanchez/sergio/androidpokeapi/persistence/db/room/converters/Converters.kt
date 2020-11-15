@@ -2,10 +2,7 @@ package sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.converters
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
-import sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.entity.PokemonAbilityEntity
-import sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.entity.PokemonMoveEntity
-import sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.entity.PokemonSpriteEntity
-import sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.entity.PokemonTypeEntity
+import sanchez.sanchez.sergio.androidpokeapi.persistence.db.room.entity.*
 import java.util.*
 
 
@@ -60,7 +57,13 @@ class Converters {
     fun jsonToPokemonSpriteEntity(value: String): PokemonSpriteEntity? =
             fromJson<PokemonSpriteEntity>(value)
 
+    @TypeConverter
+    fun pokemonStatEntityToJson(value: List<PokemonStatEntity>): String =
+        toJson(value)
 
+    @TypeConverter
+    fun jsonToPokemonStatEntity(value: String): List<PokemonStatEntity>? =
+        fromJson<List<PokemonStatEntity>>(value)
     /**
      * Private Methods
      */

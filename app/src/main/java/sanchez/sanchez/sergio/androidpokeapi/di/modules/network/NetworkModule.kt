@@ -90,6 +90,4 @@ class NetworkModule {
     companion object {
         const val DEFAULT_CACHE_SIZE: Long =  10 * 1024 * 1024 // 10 MB
     }
-
-
 }

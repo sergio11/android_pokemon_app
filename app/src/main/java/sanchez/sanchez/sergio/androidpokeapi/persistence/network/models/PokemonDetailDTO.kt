@@ -18,10 +18,10 @@ data class PokemonDetailDTO (
         val abilities: List<PokemonAbilityGroupDTO>,
         @SerializedName(value = "types")
         val types: List<PokemonTypeSlotDTO>,
-        /*@field:Json(name = "forms")
-        val forms: List<PokemonFormDTO>,
-        @field:Json(name = "moves")
-        val moves: List<PokemonMoveDTO>,*/
+        @SerializedName(value = "moves")
+        val moves: List<PokemonMoveSlotDTO>,
+        @SerializedName(value = "stats")
+        val stats: List<PokemonStatSlotDTO>,
         @SerializedName(value = "sprites")
         val sprites: PokemonSpritesDTO
 )

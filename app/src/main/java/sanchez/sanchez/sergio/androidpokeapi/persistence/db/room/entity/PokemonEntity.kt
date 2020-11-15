@@ -29,11 +29,18 @@ data class PokemonEntity (
     @ColumnInfo(name = "image_url")
     val imageUrl: String,
     // Pokemon abilities
+    @ColumnInfo(name = "abilities")
     val abilities: List<PokemonAbilityEntity>,
     // Pokemon Moves
+    @ColumnInfo(name = "moves")
     val moves: List<PokemonMoveEntity>,
     // Pokemon Types
+    @ColumnInfo(name = "types")
     val types: List<PokemonTypeEntity>,
     // Pokemon Sprites
-    val sprites: PokemonSpriteEntity
+    @ColumnInfo(name = "sprites")
+    val sprites: PokemonSpriteEntity,
+    // Pokemon Stats
+    @ColumnInfo(name = "stats")
+    val stats: List<PokemonStatEntity>
 )

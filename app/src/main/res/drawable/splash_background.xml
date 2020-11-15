@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item>
-        <shape android:shape="rectangle" android:padding="10dp">
+        <shape android:shape="rectangle" android:padding="@dimen/common_padding">
             <solid android:color="@color/colorPrimaryDark" />
         </shape>
     </item>
@@ -10,6 +10,6 @@
     <item
         android:drawable="@drawable/ic_pokemon_logo"
         android:gravity="center"
-        android:width="350dp"
-        android:height="150dp"/>
+        android:width="300dp"
+        android:height="98dp"/>
 </layer-list>

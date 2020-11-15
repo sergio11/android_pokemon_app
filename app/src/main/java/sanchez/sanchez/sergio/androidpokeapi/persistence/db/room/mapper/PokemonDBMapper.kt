@@ -15,31 +15,38 @@ class PokemonDBMapper {
      */
     fun modelToEntity(model: PokemonDetail): PokemonEntity =
         PokemonEntity(
-                id = model.id,
-                name = model.name,
-                weight = model.weight,
-                height = model.height,
-                imageUrl = model.imageUrl,
-                abilities = model.abilities.map {
-                    PokemonAbilityEntity(
-                            name = it.name,
-                            isHidden = it.isHidden,
-                            slot = it.slot
-                    )
-                },
-                types = model.types.map {
-                    PokemonTypeEntity(
-                            name = it.name,
-                            slot = it.slot
-                    )
-                },
-                moves = model.moves.map {
-                    PokemonMoveEntity(name = it.name)
-                },
-                sprites = PokemonSpriteEntity(
-                        backDefault = model.sprites.backDefault,
-                        frontDefault = model.sprites.frontDefault
+            id = model.id,
+            name = model.name,
+            weight = model.weight,
+            height = model.height,
+            imageUrl = model.imageUrl,
+            abilities = model.abilities.map {
+                PokemonAbilityEntity(
+                    name = it.name,
+                    isHidden = it.isHidden,
+                    slot = it.slot
                 )
+            },
+            types = model.types.map {
+                PokemonTypeEntity(
+                    name = it.name,
+                    slot = it.slot
+                )
+            },
+            moves = model.moves.map {
+                PokemonMoveEntity(name = it.name)
+            },
+            sprites = PokemonSpriteEntity(
+                backDefault = model.sprites.backDefault,
+                frontDefault = model.sprites.frontDefault
+            ),
+            stats = model.stats.map {
+                PokemonStatEntity(
+                    name = it.name,
+                    baseStat = it.baseStat,
+                    effort = it.effort
+                )
+            }
         )
 
     /**
@@ -59,32 +66,38 @@ class PokemonDBMapper {
      */
     fun entityToModel(entity: PokemonEntity): PokemonDetail =
         PokemonDetail(
-                id = entity.id,
-                name = entity.name,
-                imageUrl = entity.imageUrl,
-                weight = entity.weight,
-                height = entity.height,
-                abilities = entity.abilities.map {
-                    PokemonAbility(
-                            name = it.name,
-                            isHidden = it.isHidden,
-                            slot = it.slot
-                    )
-                },
-                types = entity.types.map {
-                    PokemonType(
-                            slot = it.slot,
-                            name = it.name
-                    )
-                },
-                moves = entity.moves.map {
-                    PokemonMove(name = it.name)
-                },
-                forms = emptyList(),
-                sprites = PokemonSprite(
-                        backDefault = entity.sprites.backDefault,
-                        frontDefault = entity.sprites.frontDefault
+            id = entity.id,
+            name = entity.name,
+            imageUrl = entity.imageUrl,
+            weight = entity.weight,
+            height = entity.height,
+            abilities = entity.abilities.map {
+                PokemonAbility(
+                    name = it.name,
+                    isHidden = it.isHidden,
+                    slot = it.slot
                 )
+            },
+            types = entity.types.map {
+                PokemonType(
+                    slot = it.slot,
+                    name = it.name
+                )
+            },
+            moves = entity.moves.map {
+                PokemonMove(name = it.name)
+            },
+            sprites = PokemonSprite(
+                backDefault = entity.sprites.backDefault,
+                frontDefault = entity.sprites.frontDefault
+            ),
+            stats = entity.stats.map {
+                PokemonStat(
+                    name = it.name,
+                    baseStat = it.baseStat,
+                    effort = it.effort
+                )
+            }
         )
 
     /**

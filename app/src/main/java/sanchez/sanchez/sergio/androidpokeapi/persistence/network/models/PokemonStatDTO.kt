@@ -3,9 +3,9 @@ package sanchez.sanchez.sergio.androidpokeapi.persistence.network.models
 import com.google.gson.annotations.SerializedName
 
 /**
- * Pokemon Form DTO
+ * Pokemon Stat DTO
  */
-data class PokemonFormDTO (
-        @SerializedName(value = "name")
-        val name : String
+data class PokemonStatDTO (
+    @SerializedName(value = "name")
+    val name: String
 )
