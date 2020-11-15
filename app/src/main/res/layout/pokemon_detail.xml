@@ -58,7 +58,7 @@
                     android:id="@+id/pokemonThumbnailImageView"
                     android:layout_width="@dimen/character_thumbnail_size"
                     android:layout_height="@dimen/character_thumbnail_size"
-                    android:src="@drawable/ic_image_no_available"
+                    android:src="@drawable/pokeball_placeholder"
                     tools:ignore="ContentDescription" />
             </LinearLayout>
 

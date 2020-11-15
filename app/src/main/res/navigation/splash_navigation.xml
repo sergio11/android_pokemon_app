@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="sanchez.sanchez.sergio.androidpokeapi.ui.features.splash.SplashFragment"
+        android:name="sanchez.sanchez.sergio.androidpokeapi.ui.features.splash.PokemonSplashFragment"
         android:label="SplashFragment" />
 </navigation>

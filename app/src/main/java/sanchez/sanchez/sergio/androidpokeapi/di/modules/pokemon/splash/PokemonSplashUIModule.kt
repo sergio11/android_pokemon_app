@@ -7,7 +7,7 @@ import dagger.multibindings.IntoMap
 import sanchez.sanchez.sergio.androidpokeapi.di.modules.core.ViewModelModule
 import sanchez.sanchez.sergio.androidpokeapi.di.modules.core.viewmodel.ViewModelKey
 import sanchez.sanchez.sergio.androidpokeapi.di.scopes.PerFragment
-import sanchez.sanchez.sergio.androidpokeapi.ui.features.splash.SplashViewModel
+import sanchez.sanchez.sergio.androidpokeapi.ui.features.splash.PokemonSplashViewModel
 
 /**
  * Pokemon Splash UI Module
@@ -18,6 +18,6 @@ abstract class PokemonSplashUIModule {
     @PerFragment
     @Binds
     @IntoMap
-    @ViewModelKey(SplashViewModel::class)
-    abstract fun bindsSplashViewModel(splashViewModel: SplashViewModel): ViewModel
+    @ViewModelKey(PokemonSplashViewModel::class)
+    abstract fun bindsSplashViewModel(pokemonSplashViewModel: PokemonSplashViewModel): ViewModel
 }

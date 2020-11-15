@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
     <item>
         <shape android:shape="rectangle" android:padding="10dp">
-
-            <solid android:color="@color/colorPrimary" />
-            <corners
-                android:bottomRightRadius="5dp"
-                android:bottomLeftRadius="5dp"
-                android:topLeftRadius="5dp"
-                android:topRightRadius="5dp"/>
+            <solid android:color="@color/colorPrimaryDark" />
         </shape>
     </item>
-    <item android:drawable="@drawable/ic_pokemon_logo" />
+
+    <item
+        android:drawable="@drawable/ic_pokemon_logo"
+        android:gravity="center"
+        android:width="350dp"
+        android:height="150dp"/>
 </layer-list>

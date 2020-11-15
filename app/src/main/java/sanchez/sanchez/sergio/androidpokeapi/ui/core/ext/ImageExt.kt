@@ -18,17 +18,18 @@ import sanchez.sanchez.sergio.androidpokeapi.R
  */
 fun ImageView.loadFromCacheIfExists(resourcePath: String) {
     Glide.with(context)
-        .load(resourcePath)
-        .transition(
-            DrawableTransitionOptions.withCrossFade(
-                DrawableCrossFadeFactory.Builder()
-                    .setCrossFadeEnabled(true)
-                    .build()
+            .load(resourcePath)
+            .transition(
+                DrawableTransitionOptions.withCrossFade(
+                    DrawableCrossFadeFactory.Builder()
+                        .setCrossFadeEnabled(true)
+                        .build()
+                )
             )
-        )
-        .apply(RequestOptions.skipMemoryCacheOf(false))
-        .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.RESOURCE))
-        .error(R.drawable.ic_image_no_available)
-        .fitCenter()
-        .into(this)
+            .apply(RequestOptions.skipMemoryCacheOf(false))
+            .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.RESOURCE))
+            .placeholder(R.drawable.pokeball_placeholder)
+            .error(R.drawable.pokeball_placeholder)
+            .fitCenter()
+            .into(this)
 }
