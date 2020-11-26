@@ -8,7 +8,6 @@
 * Using Material Design guidelines.
 * Using Jetbrains Ktor to implement the network layer.
 * Using local storage to implement cache layer through repository pattern.
-* Testing with mockito, assertj, junit..
 
 ## Screenshots
 
